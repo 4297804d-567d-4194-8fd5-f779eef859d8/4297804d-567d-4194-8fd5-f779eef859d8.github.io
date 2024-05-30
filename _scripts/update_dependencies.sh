@@ -22,4 +22,8 @@ for i in "${font_uris[@]}" ; do
     wget -qO - "${api}${i}&formats=woff2" | bsdtar -xvf- -C 'assets/fonts' &
 done
 
+# https://esm.sh/franc-min@6?bundle
+wget -q 'https://esm.sh/v135/franc-min@6.2.0/es2022/franc-min.bundle.mjs' -O 'assets/js/vendor/franc-min.min.js' &
+wget -q 'https://esm.sh/v135/franc-min@6.2.0/es2022/franc-min.bundle.mjs.map' -O 'assets/js/vendor/franc-min.min.js.map' &
+
 wait

@@ -1,0 +1,98 @@
+<style>
+/* TODO */
+.modal.fade .modal.fade:not(.show) {
+  transition-duration: 0.001s;
+}
+
+.btn {
+  min-width: 5rem;
+}
+</style>
+
+<div class="modal fade" id="nostrExtensionNotFoundModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <div style="display: inline-grid; vertical-align: middle">{% include icons/nostr.svg %}</div>
+        <h3>&nbsp;Nostr Login</h3>
+      </div>
+      <div class="modal-body">
+        Please login using <a href="https://github.com/aljazceru/awesome-nostr#nip-07-browser-extensions" rel="noopener noreferrer" target="_blank">NIP-07 compatible extension</a> (such as <span class="extension-example">nos2x or AKA Profiles</span>) that {% include span_with_tooltip.html large="true" body="securely enough" tooltip="We don't store your private key (and don't recommend entering it on <i>any</i> website as well, otherwise it'd be easy to steal it by some malicious browser extension <span class='no-wrap'>or user script).</span>" %} isolates your private key.
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="installNostrExtension">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <div style="display: inline-grid; vertical-align: middle">{% include icons/nostr.svg %}</div>
+        <h3>&nbsp;Nostr Login</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="accept-rules-checkbox" checked>
+          <label class="form-check-label" for="accept-rules-checkbox">
+            I'm aware of {% include span_with_tooltip.html large="true" body="rules" tooltip="<p>👍 Constructive respectful relevant discussions are highly recommended</p><p>🚫 Spam, flood, automatic AI-generated comments, hate/violence/harassment, language different than in blogpost are definitely disallowed</p><p>✏️ Rules may change in the future.</p>" %} ⚖️ (*)
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="allow-auto-reports-checkbox" checked>
+          <label class="form-check-label" for="allow-auto-reports-checkbox">
+              Allow automatic {% include span_with_tooltip.html large="true" body="reports" tooltip="Help prioritizing moderation by sending automatic reports for comments that potentially break the rules. You make the comments sections cleaner! ❤️<br>👁️ Please note that reports are not anonymous." %} 🤖
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="allow-cookies-checkbox" checked>
+          <label class="form-check-label" for="allow-cookies-checkbox">
+            Remember me. I'm aware of {% include span_with_tooltip.html large="true" body="cookies" tooltip="Cookies are required to <span class='no-wrap'>auto-authenticate</span> and persist profile settings. There's no tracking." %} 🍪
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="loginButton">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<zap-threads
+  anchor="{{ page.nostr.comments }}"
+  author="{{ site.theme_settings.nostr.author }}"
+  disable="replyAnonymously,likes,zaps"
+  reply-placeholder="Add your markdown comment..."
+  languages="{{ page.lang }}"
+  max-comment-length="{{ site.theme_settings.nostr.max_comment_length }}"
+  min-read-pow="{% if page.nostr.min_read_pow %}{{ page.nostr.min_read_pow }}{% else %}{{ site.theme_settings.nostr.min_read_pow }}{% endif %}"
+  max-write-pow="{% if page.nostr.max_write_pow %}{{ page.nostr.max_write_pow }}{% else %}{{ site.theme_settings.nostr.max_write_pow }}{% endif %}"
+/>
+
+<script type="module">
+import { franc } from '/assets/js/vendor/franc-min.bundle.mjs';
+const iso6393To1 = {eng: 'en', rus: 'ru'};
+const francOpts = {};
+const detectLanguageSlow = text => iso6393To1[franc(text, {...francOpts, minLength: Math.min(text.length, {{ site.theme_settings.nostr.max_comment_length }})})];
+const detectLanguage = text => iso6393To1[franc(text, francOpts)] || detectLanguageSlow(text);
+
+async function validEvent(id, kind, content, slow) {
+ if (kind === 7) return true;
+ //if (countEmojis(content) > 3) return false;
+
+ //const lang = slow ? detectLanguageSlow(content) : detectLanguage(content); // TODO: use probability theshold, if probability is too low - decrease rank instead
+ //if (lang !== '{{ page.lang }}') return false;
+
+ return true;
+}
+ZapThreads
+ .onPublish((id, kind, content) => validEvent(id, kind, content, true))
+ .onReceive((id, kind, content) => validEvent(id, kind, content, false));
+</script>
+
+<noscript><div style="text-align: center">This <a href="https://github.com/codonaft/codonaft.github.io#readme" rel="noopener noreferrer" target="_blank">website</a> uses <a href="https://github.com/codonaft/zapthreads#readme" rel="noopener noreferrer" target="_blank">zapthreads</a>—a FOSS commenting system built on Nostr. {{ page.str.javascript_required_comments }}</div></noscript>

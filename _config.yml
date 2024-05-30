@@ -33,7 +33,7 @@ defaults:
         previous_post: Previous post
         next_page: Next
         previous_page: Prev
-        javascript_required_disqus: Please enable JavaScript to view comments.
+        javascript_required_comments: Please enable JavaScript to view comments.
   - scope:
       path: 'ru/*'
     values:
@@ -55,7 +55,7 @@ defaults:
         previous_post: Предыдущий пост
         next_page: Дальше
         previous_page: Назад
-        javascript_required_disqus: Please enable JavaScript to view comments.
+        javascript_required_comments: Please enable JavaScript to view comments.
 
 theme_settings:
   site_repo_url: https://github.com/codonaft/codonaft.github.io
@@ -114,6 +114,13 @@ theme_settings:
   disqus_shortname:
   typed: false
   katex: false
+  zapthreads: true
+
+  nostr:
+    author: npub1422em8x6wpqpzxzmt4yuwdjgwqaqe2l3ld7y9xm5wadp8t2cu75qqp7f9q
+    max_comment_length: 5000
+    min_read_pow: 2
+    max_write_pow: 3
 
   special_page:
     search:
