@@ -6,11 +6,9 @@ thumbnail: "assets/img/algorithms-word-cloud.webp"
 date: 2017-05-25 08:00:00 +0300
 categories: algorithms learning computer science
 lang-ru-uri: "/ru/how-to-learn-algorithms/"
-#nostr:
-#  comments: note12f6562q26mmfwn5gqe6ux2hdm7fm98ssyvy2yklqk578hlcwg0pqnp57zw
-#  # comments: note1lg60lv8cukfengakuarw4hlt2gph7c7fgsxms8l97n8z8ry2ydrq732dqk
-#  #min_read_pow: 7
-#  min_read_pow: 0
+nostr:
+  # comments: note12f6562q26mmfwn5gqe6ux2hdm7fm98ssyvy2yklqk578hlcwg0pqnp57zw
+  comments: note1lg60lv8cukfengakuarw4hlt2gph7c7fgsxms8l97n8z8ry2ydrq732dqk # part of community
 ---
 
 I want to share some ideas about the particular topic: how to **learn** (**improve** or **refresh knowledge** about) Algorithms and Data Structures.

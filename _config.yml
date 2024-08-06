@@ -114,26 +114,17 @@ theme_settings:
   disqus_shortname:
   typed: false
   katex: false
-  zapthreads: false
+  zapthreads: true
 
   nostr:
-    #author: npub1422em8x6wpqpzxzmt4yuwdjgwqaqe2l3ld7y9xm5wadp8t2cu75qqp7f9q
-    #author: npub1ufed8kzk6xyd4w8wdl04xznqvgl0pswduv9tv2fswv62stjhx8hsjayhxl
     community: TestingThings123451234
     max_comment_length: 5000
-    min_read_pow: 2
-    max_write_pow: 3
+    min_read_pow: 7
     relays:
-      - ws://wat:8081
-      - ws://wat:8080
-      - ws://wat1:8081
-      - ws://wat1:8080
-      - wss://relay.nostr.band
-      - wss://nos.lol
-#      - wss://relay.nsec.app/
-#      - wss://purplepag.es/
-#      - wss://relay.snort.social/
-#      - wss://relay.nos.social/
+    - wss://purplerelay.com
+    - wss://nostr-pub.wellorder.net
+    - wss://relay.damus.io
+    - wss://adre.su
 
   special_page:
     search:
