@@ -347,6 +347,8 @@ def health(config)
 
   # TODO: grep https URLs from blogposts, check HTTP 200 responses
 
+  # TODO: check domain expiration
+
   bancheck = "_bancheck.txt"
   custom_hosts =
     if File::Info.readable?(bancheck)
