@@ -72,7 +72,7 @@ COMMON_ROOT      = Path["_ohmyvps/alpine/alpine-root"]
 
 SERVER_MEDIA_DIR = Path["var/www"].join(PUBLIC_MEDIA_HOST)
 MEDIA_BUILD_DIR  = BUILD_DIR.join(MEDIA_HOST, SERVER_MEDIA_DIR)
-BLOSSOM_URLS     = ["https://nostr.download", "https://blossom.data.haus", "https://blossom.ditto.pub"]
+BLOSSOM_URLS     = ["https://nostr.download"] # TODO: read from config
 
 # https://24242.io: unsupported content type: audio/x-mpegurl
 # https://blossom.ditto.pub upload stucks on the ~340th file
